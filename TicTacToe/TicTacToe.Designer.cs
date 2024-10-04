@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace TicTacToe
 {
@@ -30,18 +31,121 @@ namespace TicTacToe
         /// </summary>
         private void InitializeComponent()
         {
+            this.topLeft = new System.Windows.Forms.Button();
+            this.topRight = new System.Windows.Forms.Button();
+            this.topMid = new System.Windows.Forms.Button();
+            this.bottomRight = new System.Windows.Forms.Button();
+            this.bottomMid = new System.Windows.Forms.Button();
+            this.bottomLeft = new System.Windows.Forms.Button();
+            this.midRight = new System.Windows.Forms.Button();
+            this.midMid = new System.Windows.Forms.Button();
+            this.midLeft = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.gameState = new System.Windows.Forms.Label();
+            this.pOneWins = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // topLeft
+            // 
+            this.topLeft.Enabled = false;
+            this.topLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.topLeft.Location = new System.Drawing.Point(3, 3);
+            this.topLeft.Name = "topLeft";
+            this.topLeft.Size = new System.Drawing.Size(279, 178);
+            this.topLeft.TabIndex = 0;
+            this.topLeft.UseVisualStyleBackColor = true;
+            this.topLeft.Click += new System.EventHandler(this.TopLeft_Click);
+            // 
+            // topRight
+            // 
+            this.topRight.Enabled = false;
+            this.topRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.topRight.Location = new System.Drawing.Point(573, 3);
+            this.topRight.Name = "topRight";
+            this.topRight.Size = new System.Drawing.Size(281, 178);
+            this.topRight.TabIndex = 2;
+            this.topRight.UseVisualStyleBackColor = true;
+            this.topRight.Click += new System.EventHandler(this.TopRight_Click);
+            // 
+            // topMid
+            // 
+            this.topMid.Enabled = false;
+            this.topMid.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.topMid.Location = new System.Drawing.Point(288, 3);
+            this.topMid.Name = "topMid";
+            this.topMid.Size = new System.Drawing.Size(279, 178);
+            this.topMid.TabIndex = 1;
+            this.topMid.UseVisualStyleBackColor = true;
+            this.topMid.Click += new System.EventHandler(this.TopMid_Click);
+            // 
+            // bottomRight
+            // 
+            this.bottomRight.Enabled = false;
+            this.bottomRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bottomRight.Location = new System.Drawing.Point(573, 372);
+            this.bottomRight.Name = "bottomRight";
+            this.bottomRight.Size = new System.Drawing.Size(281, 179);
+            this.bottomRight.TabIndex = 8;
+            this.bottomRight.UseVisualStyleBackColor = true;
+            this.bottomRight.Click += new System.EventHandler(this.BottomRight_Click);
+            // 
+            // bottomMid
+            // 
+            this.bottomMid.Enabled = false;
+            this.bottomMid.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bottomMid.Location = new System.Drawing.Point(288, 372);
+            this.bottomMid.Name = "bottomMid";
+            this.bottomMid.Size = new System.Drawing.Size(279, 179);
+            this.bottomMid.TabIndex = 7;
+            this.bottomMid.UseVisualStyleBackColor = true;
+            this.bottomMid.Click += new System.EventHandler(this.BottomMid_Click);
+            // 
+            // bottomLeft
+            // 
+            this.bottomLeft.Enabled = false;
+            this.bottomLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bottomLeft.Location = new System.Drawing.Point(3, 372);
+            this.bottomLeft.Name = "bottomLeft";
+            this.bottomLeft.Size = new System.Drawing.Size(279, 179);
+            this.bottomLeft.TabIndex = 6;
+            this.bottomLeft.UseVisualStyleBackColor = true;
+            this.bottomLeft.Click += new System.EventHandler(this.BottomLeft_Click);
+            // 
+            // midRight
+            // 
+            this.midRight.Enabled = false;
+            this.midRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.midRight.Location = new System.Drawing.Point(573, 188);
+            this.midRight.Name = "midRight";
+            this.midRight.Size = new System.Drawing.Size(281, 178);
+            this.midRight.TabIndex = 5;
+            this.midRight.UseVisualStyleBackColor = true;
+            this.midRight.Click += new System.EventHandler(this.MidRight_Click);
+            // 
+            // midMid
+            // 
+            this.midMid.Enabled = false;
+            this.midMid.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.midMid.Location = new System.Drawing.Point(288, 188);
+            this.midMid.Name = "midMid";
+            this.midMid.Size = new System.Drawing.Size(279, 178);
+            this.midMid.TabIndex = 4;
+            this.midMid.UseVisualStyleBackColor = true;
+            this.midMid.Click += new System.EventHandler(this.MidMid_Click);
+            // 
+            // midLeft
+            // 
+            this.midLeft.Enabled = false;
+            this.midLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.midLeft.Location = new System.Drawing.Point(3, 188);
+            this.midLeft.Name = "midLeft";
+            this.midLeft.Size = new System.Drawing.Size(279, 178);
+            this.midLeft.TabIndex = 3;
+            this.midLeft.UseVisualStyleBackColor = true;
+            this.midLeft.Click += new System.EventHandler(this.MidLeft_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -51,120 +155,75 @@ namespace TicTacToe
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33556F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33222F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33222F));
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button5, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button6, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button7, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button8, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button9, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.midLeft, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.bottomLeft, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.bottomMid, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.bottomRight, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.topRight, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.topLeft, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.midMid, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.midRight, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.topMid, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 48);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33553F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33223F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33223F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(882, 553);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(857, 555);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // button1
+            // startButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(288, 178);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.startButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.startButton.Location = new System.Drawing.Point(725, 0);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(132, 48);
+            this.startButton.TabIndex = 4;
+            this.startButton.Text = "Start Game";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
-            // button4
+            // gameState
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(3, 187);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(288, 178);
-            this.button4.TabIndex = 3;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.gameState.AutoSize = true;
+            this.gameState.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameState.Location = new System.Drawing.Point(233, 9);
+            this.gameState.Name = "gameState";
+            this.gameState.Size = new System.Drawing.Size(400, 36);
+            this.gameState.TabIndex = 6;
+            this.gameState.Text = "Are you read to Tic Tac Toe?";
+            this.gameState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button5
+            // pOneWins
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(297, 187);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(287, 178);
-            this.button5.TabIndex = 4;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.pOneWins.AutoSize = true;
+            this.pOneWins.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pOneWins.Location = new System.Drawing.Point(0, 0);
+            this.pOneWins.Name = "pOneWins";
+            this.pOneWins.Size = new System.Drawing.Size(132, 25);
+            this.pOneWins.TabIndex = 7;
+            this.pOneWins.Text = "Player One: 0";
             // 
-            // button6
+            // label1
             // 
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(590, 187);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(289, 178);
-            this.button6.TabIndex = 5;
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(3, 371);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(288, 179);
-            this.button7.TabIndex = 6;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(297, 371);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(287, 179);
-            this.button8.TabIndex = 7;
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(590, 371);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(289, 179);
-            this.button9.TabIndex = 8;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(297, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(287, 178);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(590, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(289, 178);
-            this.button3.TabIndex = 2;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "label1";
             // 
             // TicTacToe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 553);
+            this.ClientSize = new System.Drawing.Size(857, 603);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pOneWins);
+            this.Controls.Add(this.gameState);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "TicTacToe";
             this.Text = "TicTacToe";
@@ -176,16 +235,20 @@ namespace TicTacToe
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
+        private Button topLeft;
+        private Button topRight;
+        private Button topMid;
+        private Button bottomRight;
+        private Button bottomMid;
+        private Button bottomLeft;
+        private Button midRight;
+        private Button midMid;
+        private Button midLeft;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Button startButton;
+        private Label gameState;
+        private Label pOneWins;
+        private Label label1;
     }
 }
 
