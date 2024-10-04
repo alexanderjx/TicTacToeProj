@@ -14,25 +14,42 @@ namespace TicTacToe
     public partial class TicTacToe : Form
     {
         private int turnStat = 1;
-        private Dictionary<String, String> aGame = new Dictionary<string, string>();
-        
-        public List<List<String>> gameWins = new List<List<String>>();
+        private Dictionary<String, String> activeGame = new Dictionary<string, string>();
 
-        public TicTacToe()
+        private List<Button> gameButtons = new List<Button>();
+
+        private List<List<String>> gameWins = new List<List<String>>();
+
+        public TicTacToe()                  
         {
             InitializeComponent();
-            gameWins.Add(new List<String> { "button1", "button2", "button3" });
-            gameWins.Add(new List<String> { "button1", "button4", "button7" });
-            gameWins.Add(new List<String> { "button2", "button5", "button8" });
-            gameWins.Add(new List<String> { "button3", "button6", "button9" });
-            gameWins.Add(new List<String> { "button4", "button5", "button6" });
-            gameWins.Add(new List<String> { "button7", "button8", "button9" });
-            gameWins.Add(new List<String> { "button1", "button5", "button9" });
-            gameWins.Add(new List<String> { "button3", "button5", "button7" });
-
+            BuildLists();
         }
 
-        public void TakeTurn(Button b)  //score button, register scored button to dict, compare win combos to dict entries
+        #region List building before game starts
+        public void BuildLists()        //list of wins to compare game too & all buttons for logic
+        {
+            gameWins.Add(new List<String> { "topLeft", "topMid", "topRight" });
+            gameWins.Add(new List<String> { "topLeft", "midLeft", "bottomLeft" });
+            gameWins.Add(new List<String> { "topMid", "midMid", "bottomMid" });
+            gameWins.Add(new List<String> { "topRight", "midRight", "bottomRight" });
+            gameWins.Add(new List<String> { "midLeft", "midMid", "midRight" });
+            gameWins.Add(new List<String> { "bottomLeft", "bottomMid", "bottomRight" });
+            gameWins.Add(new List<String> { "topLeft", "midMid", "bottomRight" });
+            gameWins.Add(new List<String> { "topRight", "midMid", "bottomLeft" });
+            gameButtons.Add(topLeft);
+            gameButtons.Add(topRight);
+            gameButtons.Add(topMid);
+            gameButtons.Add(bottomLeft);
+            gameButtons.Add(bottomMid);
+            gameButtons.Add(bottomRight);
+            gameButtons.Add(midLeft);
+            gameButtons.Add(midMid);
+            gameButtons.Add(midRight);
+        }
+        #endregion
+
+        public void TakeTurn(Button b)      //to make easy to modify, don't do things directly in this function
         {
             if (b.Text == "")
             {
@@ -44,25 +61,65 @@ namespace TicTacToe
         
         private void JudgeGame(Button b)
         {
-            foreach (List<string> i in gameWins)
+            if (activeGame.Count >= 5)       //you can't win ttt before 5 turns
             {
-                if (i.Contains(b.Name))
+                foreach (List<string> i in gameWins)
                 {
-                    string lOne = i[0];
-                    string lTwo = i[1];
-                    string lThree = i[2];
-
-                    if (aGame[lOne] == aGame[lTwo] && aGame[lOne] == aGame[lThree])
+                    if (i.Contains(b.Name))
                     {
+                        try
+                        {
+                            string lOne = activeGame[i[0]];
+                            string lTwo = activeGame[i[1]];
+                            string lThree = activeGame[i[2]];
 
+                            if (lOne == lTwo && lOne == lThree) //Comparing possible wins to scored gameButtons isn't fancy but works
+                            {
+                                WinGame();
+                                break;
+                            }
+                            break;
+                        }
+                        catch (Exception e) { Console.WriteLine(e.Message); }
                     }
                 }
             }
+            
+        }
+
+        private void WinGame()
+        { 
+            try
+            {
+                foreach (Button b in gameButtons)
+                {
+                    b.Enabled = false;
+                }
+
+                switch (turnStat)
+                {
+                    case 1:
+                        gameState.Text = "Player Two Wins!!";
+                        break;
+
+                    case 2:
+                        gameState.Text = "Player One Wins!!";
+                        break;
+
+                    default:
+                        gameState.Text = "Ready to Tic Tac Toe??";
+                        break;
+                }
+
+                turnStat = 0;
+                startButton.Text = "New Game";
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
         private void RegisterMove(Button b) //register scored button to dict
         {
-            aGame.Add(b.Name, b.Text);
+            activeGame.Add(b.Name, b.Text);
         }
 
         private void ScoreMe(Button b) //score button - add check against replaying space
@@ -73,12 +130,18 @@ namespace TicTacToe
                 {
                     case 1:
                         b.Text = "X";
+                        b.BackColor = Color.Blue;
                         turnStat = 2;
+                        b.Enabled = false;
+                        gameState.Text = "Player Two's Turn";
                         break;
 
                     case 2:
                         b.Text = "O";
+                        b.BackColor = Color.Red;
                         turnStat = 1;
+                        b.Enabled = false;
+                        gameState.Text = "Player One's Turn";
                         break;
 
                     default:
@@ -86,54 +149,78 @@ namespace TicTacToe
                         break;
                 }
             }
+
             catch (Exception e) { Console.WriteLine(e.Message); }
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void StartGame()
         {
-            TakeTurn(button1);
+            try
+            {
+                startButton.Text = "Restart Game";
+                gameState.Text = "Player One's Turn";
+                turnStat = 1;
+                activeGame.Clear();
+
+                foreach (Button b in gameButtons)
+                { 
+                    b.Text = "";
+                    b.Enabled = true;
+                    b.BackColor = Color.White;
+                }
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void TopLeft_Click(object sender, EventArgs e)
         {
-            TakeTurn(button2);
+            TakeTurn(topLeft);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void TopMid_Click(object sender, EventArgs e)
         {
-            TakeTurn(button3);
+            TakeTurn(topMid);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void TopRight_Click(object sender, EventArgs e)
         {
-            TakeTurn(button4); 
+            TakeTurn(topRight);
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void MidLeft_Click(object sender, EventArgs e)
         {
-            TakeTurn(button5);
+            TakeTurn(midLeft); 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void MidMid_Click(object sender, EventArgs e)
         {
-            TakeTurn(button6);
+            TakeTurn(midMid);
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void MidRight_Click(object sender, EventArgs e)
         {
-            TakeTurn(button7);
+            TakeTurn(midRight);
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void BottomLeft_Click(object sender, EventArgs e)
         {
-            TakeTurn(button8);
+            TakeTurn(bottomLeft);
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void BottomMid_Click(object sender, EventArgs e)
         {
-            TakeTurn(button9);
+            TakeTurn(bottomMid);
         }
 
+        private void BottomRight_Click(object sender, EventArgs e)
+        {
+            TakeTurn(bottomRight);
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            StartGame();
+        }
     }
 }
