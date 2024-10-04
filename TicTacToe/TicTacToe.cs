@@ -14,6 +14,9 @@ namespace TicTacToe
     public partial class TicTacToe : Form
     {
         private int turnStat = 1;
+        private int pOneScore = 0;
+        private int pTwoScore = 0;
+
         private Dictionary<String, String> activeGame = new Dictionary<string, string>();
 
         private List<Button> gameButtons = new List<Button>();
@@ -100,10 +103,14 @@ namespace TicTacToe
                 {
                     case 1:
                         gameState.Text = "Player Two Wins!!";
+                        pTwoScore++ ;
+                        pTwoWins.Text = $"Player Two: {pTwoScore}";
                         break;
 
                     case 2:
                         gameState.Text = "Player One Wins!!";
+                        pOneScore++;
+                        pOneWins.Text = $"Player One: {pOneScore}";
                         break;
 
                     default:
